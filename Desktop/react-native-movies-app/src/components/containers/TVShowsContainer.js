@@ -1,5 +1,6 @@
 import { Box, Center, Container, VStack } from "native-base";
 import { useState, useEffect } from "react";
+import { API_KEY, BASE_URL } from "../config/api_config";
 import SelectFormForTV from "../forms/SelectFormForTV";
 import Loading from "../layout/Loading";
 import DataList from "../lists/DataList";
@@ -19,9 +20,7 @@ const TVShowsContainer = ({ navigation }) => {
   }, []);
 
   const fetchMovies = async (select) => {
-    fetch(
-      `https://api.themoviedb.org/3/tv/${select}?api_key=d4606750b3b8eff8cd6edc457f8ed389&language=en-US&page=1`
-    )
+    fetch(`${BASE_URL}/tv/${select}?${API_KEY}&page=1`)
       .then((res) => res.json())
       .then((data) => {
         setData(data.results);

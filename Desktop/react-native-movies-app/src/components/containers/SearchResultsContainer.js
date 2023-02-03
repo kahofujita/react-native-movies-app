@@ -11,6 +11,7 @@ import {
   Ionicons,
 } from "native-base";
 import { useState } from "react";
+import { API_KEY, BASE_URL } from "../config/api_config";
 import SearchForm from "../forms/SearchForm";
 import SelectFormForSearch from "../forms/SelectFormForSearch";
 import DataList from "../lists/DataList";
@@ -44,9 +45,7 @@ const SearchResultsContainer = ({ navigation }) => {
   };
 
   const fetchMovies = async (select, value) => {
-    fetch(
-      `https://api.themoviedb.org/3/search/${select}?api_key=d4606750b3b8eff8cd6edc457f8ed389&language=en-US&page=1&query=${value}`
-    )
+    fetch(`${BASE_URL}/search/${select}?${API_KEY}&page=1&query=${value}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data.results);

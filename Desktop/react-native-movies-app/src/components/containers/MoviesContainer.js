@@ -1,9 +1,9 @@
-import { Box, Center, Container, VStack } from "native-base";
+import { Box, Center, VStack } from "native-base";
 import { useState, useEffect } from "react";
+import { API_KEY, BASE_URL } from "../config/api_config";
 import SelectForm from "../forms/SelectForm";
 import Loading from "../layout/Loading";
 import DataList from "../lists/DataList";
-import { getMovies } from "../services/api";
 
 const MoviesContainer = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,9 +22,7 @@ const MoviesContainer = ({ navigation }) => {
   }, []);
 
   const fetchMovies = async (select) => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${select}?api_key=d4606750b3b8eff8cd6edc457f8ed389&language=en-US&page=1`
-    )
+    fetch(`${BASE_URL}/movie/${select}?${API_KEY}&page=1`)
       .then((res) => res.json())
       .then((movies) => {
         const moviesArray = movies.results;

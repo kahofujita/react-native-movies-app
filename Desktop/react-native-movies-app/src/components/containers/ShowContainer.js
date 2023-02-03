@@ -1,5 +1,6 @@
 import { Box, Center, Text, Image, Heading } from "native-base";
 import { useState, useEffect } from "react";
+import { API_KEY, BASE_URL } from "../config/api_config";
 
 const ShowContainer = ({ route }) => {
   const [id, setId] = useState(null);
@@ -12,9 +13,7 @@ const ShowContainer = ({ route }) => {
   }, []);
 
   const fetchShowDetails = async (type, id) => {
-    fetch(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=d4606750b3b8eff8cd6edc457f8ed389&language=en-US`
-    )
+    fetch(`${BASE_URL}/${type}/${id}?${API_KEY}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
